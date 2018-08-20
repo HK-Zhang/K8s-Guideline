@@ -15,6 +15,6 @@ Below is going to show on the terminal if you setup k8s with Minikube.
 
 ![minikube context](/images/minikube.JPG)
 
-Below is going to show on the terminal if you setup k8s with Docker for windows. Context might be missing, to fix it you have to add C:\Users\[replace with username]\.kube\config to HOME environment variable.
+Below is going to show on the terminal if you setup k8s with Docker for windows. Context might be missing, to fix it you have to add `C:\Users\[replace with username]\.kube\config` to `HOME` environment variable.
 
 ![docker context](/images/dockerkube.jpg)
