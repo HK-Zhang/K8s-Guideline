@@ -12,6 +12,7 @@ There are two solutions to setup a single node cluster on Windows 10. Docker for
 To check whether k8s is created sucessfully on you local, You could run command `kubectl config get-contexts`
 
 Below is going to show on the terminal if you setup k8s with Minikube.
+
 ![minikube context](/images/minikube.JPG)
 
 Below is going to show on the terminal if you setup k8s with Docker for windows. Context might be missing, to fix it you have to add C:\Users\[replace with username]\.kube\config to HOME environment variable.
