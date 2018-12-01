@@ -18,3 +18,27 @@ Below is going to show on the terminal if you setup k8s with Minikube.
 Below is going to show on the terminal if you setup k8s with Docker for windows. Context might be missing, to fix it you have to add `C:\Users\[replace with username]\.kube\config` to `HOME` environment variable.
 
 ![docker context](/images/dockerkube.jpg)
+
+### 1.2 Enable Dashboard
+Run command: `kubectl proxy`
+
+Output should be as below:
+
+![docker proxy](/images/dockerproxy.jpg)
+
+Then openlink: http://localhost:8001/api/v1/namespaces/kube-system/services/http:kubernetes-dashboard:/proxy/#!/cluster?namespaces=_all&namespace=default
+
+![dashboard](/images/dashboard.JPG)
+
+## 2. Prepare a docker image
+There is a simple node app docker file. build and push it to docker repository as  below. Please replace 'yxzhk' as your own signature registered on docker hub. source code and configuration file is located [here](/service)
+
+`docker build -t yxzhk/nodeapp .`
+
+`docker push yxzhk/nodeapp`
+
+## 3. K8s deployment
+
+## 4. K8s service
+
+## 5. K8s network
