@@ -58,12 +58,54 @@ Check dashboard:
 
 once K8s finish the deployment, check status again.
 
-![poddeployment](/images/dbpod.JPG)
+![poddeployment](/images/poddep.JPG)
 
 ![poddeployment](/images/dbpod1.JPG)
 
 ![poddeployment](/images/dbdepl1.JPG)
 
 ## 4. K8s service
+
+### 4.1 Create Service
+Run command: `kubectl apply -f kubia-svc.yaml`
+
+Check results:
+
+![service](/images/service.JPG)
+
+![service](/images/deservice.JPG)
+
+### 4.2 Access Service
+
+Access service from a pod as bleow command format: Kubectl exec {pod name} -- curl -s http://{service ip} 
+
+In our case, Run: `Kubectl exec kubia-deployment-8497d7fdd9-hrccm -- curl -s http://10.105.16.224
+`
+![accessservice](/images/accessservice.JPG)
+
+Discovering service through environment variables: kubectl exec {pod name} env
+
+In our case, Run: `Kubectl exec kubia-deployment-8497d7fdd9-hrccm env`
+
+![envservice](/images/serviceenv.JPG)
+
+### 4.3 Access Service through FDQN
+
+Connecting to the service through its FDQN(fully qualified domain name)
+servicename.default.svc.cluster.local
+
+Run Command: `kubectl exec -it kubia-deployment-8497d7fdd9-hrccm bash`
+
+Them Run: `curl http://kubia.default.svc.cluster.local` or
+
+`curl http://kubia.default` or
+
+`curl http://kubia`
+
+![bash in pod](/images/bashinpod.JPG)
+
+### 4.4 Service Endpoints
+
+![service endpoints](/images/serviceendpoint.JPG)
 
 ## 5. K8s network
