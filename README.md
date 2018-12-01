@@ -24,7 +24,7 @@ Run command: `kubectl proxy`
 
 Output should be as below:
 
-![docker proxy](/images/dockerproxy.jpg)
+![docker proxy](/images/dockerproxy.JPG)
 
 Then openlink: http://localhost:8001/api/v1/namespaces/kube-system/services/http:kubernetes-dashboard:/proxy/#!/cluster?namespaces=_all&namespace=default
 
@@ -38,6 +38,31 @@ There is a simple node app docker file. build and push it to docker repository a
 `docker push yxzhk/nodeapp`
 
 ## 3. K8s deployment
+Run command: `kubectl apply -f kubia-deploy.yaml`
+
+![deploy](/images/deploymentrun.JPG)
+
+Run: `kubectl get pods`
+
+![getpods](/images/getpodsrun.JPG)
+
+Run: `kubectl get deployments`
+
+![getdeploy](/images/getdeploymentrun.JPG)
+
+Check dashboard:
+
+![getpods](/images/dbpod.JPG)
+
+![getpods](/images/dbdeployment.JPG)
+
+once K8s finish the deployment, check status again.
+
+![poddeployment](/images/dbpod.JPG)
+
+![poddeployment](/images/dbpod1.JPG)
+
+![poddeployment](/images/dbdepl1.JPG)
 
 ## 4. K8s service
 
