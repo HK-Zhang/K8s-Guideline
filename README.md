@@ -117,7 +117,106 @@ Run Command: `kubectl apply -f deployment.yaml`
 
 run: `kubectl get pods`
 
+<span style='background-color:gray;'>
+service-test-cf849786d-gm9zl   1/1       Running   0          1h
+
+service-test-cf849786d-k2bt7   1/1       Running   0          1h</span>
+
 run: `kubectl get pods --selector=app=service_test_pod -o jsonpath='{.items[*].status.podIP}'`
 
-update podclient.html with one of above IP address.
+<span style='background-color:gray;'>10.1.0.39 10.1.0.37</span>
 
+update podclient.yaml with one of above IP address.
+
+run: `kubectl apply -f podclient.yaml`
+
+<span style='background-color:gray;'>pod "service-test-client1" created</span>
+
+run `kubectl logs service-test-client1`
+
+<span style='background-color:gray;'>HTTP/1.0 200 OK
+
+Server: SimpleHTTP/0.6 Python/2.7.15
+
+Date: Sun, 02 Dec 2018 01:39:12 GMT
+
+Content-type: text/html
+
+Content-Length: 47
+
+Last-Modified: Sun, 02 Dec 2018 01:11:11 GMT
+
+`<p>Hello from service-test-cf849786d-k2bt7</p>`
+</span>
+
+run `kubectl apply -f service.yaml`
+
+<span style='background-color:gray;'>service "service-test" created</span>
+
+run `kubectl get service service-test`
+
+<span style='background-color:gray;'>NAME           TYPE        CLUSTER-IP       EXTERNAL-IP   PORT(S)   AGE
+
+service-test   ClusterIP   10.107.143.159   <none>        80/TCP    1m</span>
+
+run `kubectl apply -f serviceclient.yaml`
+
+<span style='background-color:gray;'>pod "service-test-client2" created</span>
+
+run `kubectl logs service-test-client2`
+
+<span style='background-color:gray;'>HTTP/1.0 200 OK
+
+Server: SimpleHTTP/0.6 Python/2.7.15
+
+Date: Sun, 02 Dec 2018 01:46:41 GMT
+
+Content-type: text/html
+
+Content-Length: 47
+
+Last-Modified: Sun, 02 Dec 2018 01:11:11 GMT
+
+`<p>Hello from service-test-cf849786d-k2bt7</p>`
+</span>
+
+run `kubectl describe services service-test`
+
+<span style='background-color:gray;'>Name:              service-test
+
+Namespace:         default
+
+Labels:            `<none>`
+
+Annotations:       kubectl.kubernetes.io/last-applied-configuration={"apiVersion":"v1","kind":"Service","metadata":{"ann
+otations":{},"name":"service-test","namespace":"default"},"spec":{"ports":[{"port":80,"targetPort":...
+
+Selector:          app=service_test_pod
+
+Type:              ClusterIP
+
+IP:                10.107.143.159
+
+Port:              <unset>  80/TCP
+
+TargetPort:        http/TCP
+
+Endpoints:         10.1.0.37:8080,10.1.0.39:8080
+
+Session Affinity:  None
+
+Events:            `<none>`
+</span>
+
+run `kubectl apply -f serviceNodePort.yaml`
+
+run `kubectl apply -f serviceLoadbalancer.yaml`
+
+run `kubectl get service`
+
+| NAME | TYPE |  CLUSTER-IP | EXTERNAL-IP | PORT(S) | AGE |
+|---|---|---|---|---|---|
+|kubernetes|  ClusterIP|10.96.0.1|  `<none>`|  443/TCP|  167|
+|service-test|ClusterIP|10.107.143.159|`<none>`|  80/TCP|12m|
+|service-test-b| LoadBalancer|10.98.53.84|`<pending>`|  80:32005/TCP|1m|
+|service-test-np|NodePort| 10.110.44.244| `<none>`|  80:31389/TCP|1m|

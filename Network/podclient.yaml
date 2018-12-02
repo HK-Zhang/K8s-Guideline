@@ -8,4 +8,4 @@ spec:
   - name: test-client1
     image: alpine
     command: ["/bin/sh"]
-    args: ["-c", "echo 'GET / HTTP/1.1\r\n\r\n' | nc 10.0.2.2 8080"]
+    args: ["-c", "echo 'GET / HTTP/1.1\r\n\r\n' | nc 10.1.0.37 8080"]
