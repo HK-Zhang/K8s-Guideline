@@ -31,7 +31,7 @@ Then openlink: http://localhost:8001/api/v1/namespaces/kube-system/services/http
 ![dashboard](/images/dashboard.JPG)
 
 ## 2. Prepare a docker image
-There is a simple node app docker file. build and push it to docker repository as  below. Please replace 'yxzhk' as your own signature registered on docker hub. source code and configuration file is located [here](/service)
+There is a simple node app docker file. build and push it to docker repository as  below. Please replace 'yxzhk' as your own signature registered on docker hub. source code and configuration file is located [here](https://github.com/HK-Zhang/k8s-Guideline/tree/gh-pages/service)
 
 `docker build -t yxzhk/nodeapp .`
 
@@ -109,3 +109,15 @@ Them Run: `curl http://kubia.default.svc.cluster.local` or
 ![service endpoints](/images/serviceendpoint.JPG)
 
 ## 5. K8s network
+Source code can be found [here](https://github.com/HK-Zhang/k8s-Guideline/tree/gh-pages/Network)
+
+Run Command: `kubectl apply -f deployment.yaml`
+
+<span style='background-color:gray;'>deployment "service-test" created</span>
+
+run: `kubectl get pods`
+
+run: `kubectl get pods --selector=app=service_test_pod -o jsonpath='{.items[*].status.podIP}'`
+
+update podclient.html with one of above IP address.
+
