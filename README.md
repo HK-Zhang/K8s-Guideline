@@ -22,6 +22,13 @@ Below is going to show on the terminal if you setup k8s with Docker for windows.
 ![docker context](/images/dockerkube.jpg)
 
 ### 1.2 Enable Dashboard
+By default, you won't get the Kubernetes Dashboard. There are two ways to install Dashboard service:
+
+Run Command: `kubectl apply -f https://raw.githubusercontent.com/kubernetes/dashboard/master/aio/deploy/recommended/kubernetes-dashboard.yaml`
+
+Or Run Command: `kubectl apply -f https://raw.githubusercontent.com/kubernetes/dashboard/master/src/deploy/alternative/kubernetes-dashboard.yaml`
+
+The first approach install a dashboard service which run in secure way - requst user login. The second approach install dashboard service which is totally insecure.
 
 Run command: `kubectl proxy`
 
@@ -29,9 +36,24 @@ Output should be as below:
 
 ![docker proxy](/images/dockerproxy.JPG)
 
-Then openlink: http://localhost:8001/api/v1/namespaces/kube-system/services/http:kubernetes-dashboard:/proxy/#!/cluster?namespaces=_all&namespace=default
+If you setup dashboard service as the frist approach. You can open link https://raw.githubusercontent.com/kubernetes/dashboard/master/src/deploy/alternative/kubernetes-dashboard.yaml.
+
+Otherwise openlink: http://localhost:8001/api/v1/namespaces/kube-system/services/http:kubernetes-dashboard:/proxy/#!/cluster?namespaces=_all&namespace=default
 
 ![dashboard](/images/dashboard.JPG)
+
+If you setup dashboard service as the frist approach. you may need to login as below:
+![dashboardlogin](/images/dashboardlogin.JPG)
+
+To get a token:
+
+Run Command: `kubectl -n kube-system get secret`
+
+![dashboardSecret](/images/dashboardSecret.JPG)
+
+Run Command: `kubectl -n kube-system describe secret deployment-controller-token-wvvsz`
+
+![dashboardToekn](/images/dashboardToken.JPG)
 
 ## 2. Prepare a docker image
 
